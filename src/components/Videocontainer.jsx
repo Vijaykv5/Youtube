@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { YOUTUBE_VIDEO_API } from '../utils/constant';
+import Videocard from './Videocard';
 
 const Videocontainer = () => {
 
+  const [videos,setVideos]=useState([])
   useEffect(()=>{
     getVideos();
   },[])
@@ -10,10 +12,13 @@ const Videocontainer = () => {
   const getVideos =async()=>{
     const data=await fetch(YOUTUBE_VIDEO_API);
     const json = await data.json();
-    console.log(json);
+    
+    setVideos(json.items)
   }
   return (
-    <div>Videocontainer</div>
+    <div className=' flex  flex-wrap'>
+    {videos.map(video=> <Videocard key="video.id"info={video}/>)}
+    </div>
   )
 }
 
