@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { YOUTUBE_VIDEO_API } from '../utils/constant';
 import Videocard from './Videocard';
 import { Link } from 'react-router-dom';
+import { togglemenu } from '../utils/appSlice';
 
 const Videocontainer = () => {
 
@@ -17,9 +18,12 @@ const Videocontainer = () => {
     setVideos(json.items)
   }
   return (
-    <div className=' grid grid-cols-3 '>
+    <>
+    {/* {console.log(togglemenu.state.isMenuOpen())} */}
+    <div className=' grid grid-cols-3   '>
     {videos.map(video=> <Link to={'/watch?v='+video.id}> <Videocard key="video.id"info={video}/></Link>)}
     </div>
+    </>
   )
 }
 
